@@ -1,3 +1,9 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def categories_view(request):
+    pass
+
+
+def category_add_view(request):
+    pass
