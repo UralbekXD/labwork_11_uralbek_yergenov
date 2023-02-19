@@ -1,9 +1,47 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
     Products
 {% endblock %}
 
+{% block css %}
+    <link rel="stylesheet" href="{% static 'products/css/style.css' %}">
+{% endblock %}
+
 {% block content %}
-    <h1>Hello World!</h1>
+    <div class="container py-5">
+        <div class="row g-4">
+            {% for product in products %}
+                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="card shadow-sm rounded-1">
+                        {% if product.image %}
+                            <img src="{{ product.image }}" alt="img">
+                        {% else %}
+                            <img src="{% static 'products/media/placeholder.png' %}" alt="img">
+                        {% endif %}
+
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                {{ product.name }}
+                            </h4>
+
+                            <div class="card-text pb-3">
+                                {{ product.category.name }}
+                            </div>
+
+                            <h5 class="card-text mb-4">
+                                Price: {{ product.price }}$
+                            </h5>
+
+                            <div class="btn-group w-100">
+                                <a class="btn btn-sm btn-outline-dark" href="#">View</a>
+                                <a class="btn btn-sm btn-outline-dark" href="#">Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
