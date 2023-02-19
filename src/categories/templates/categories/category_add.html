@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Add Product
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row py-5">
+            <div class="col-md-12 col-lg-6">
+                <p class="fs-2 mb-4">Add Category</p>
+
+                <form action="{% url 'category_add_view' %}" method="POST">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <input type="text" name="name" class="form-control" placeholder="Title" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <textarea class="form-control" name="description" placeholder="Description" rows="10"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary rounded-1 shadow">Add Category</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
