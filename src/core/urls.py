@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', products_view, name='index'),
     path('products/', include('products.urls')),
+    path('categories/', include('categories.urls')),
 ]
