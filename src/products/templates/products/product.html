@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Product
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'products/css/product.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row py-5 gy-5">
+            <div class="col-12 col-md-6 col-lg-4">
+                {% if image %}
+                    <img src="{{ image }}" class="img-fluid product-img" alt="img">
+                {% else %}
+                    <img src="{% static 'products/media/placeholder_square.png' %}" class="img-fluid product-img" alt="img">
+                {% endif %}
+            </div>
+            <div class="col-12 col-md-6 col-lg-6">
+                <div class="info p-2">
+                    <h2>{{ name }}</h2>
+                    <p>{{ category }}</p>
+                    <h4>Price: {{ price }}$</h4>
+                    <p class="fw-bold fs-6">
+                        {{ description }}
+                    </p>
+                    <p>added: {{ created_at }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
