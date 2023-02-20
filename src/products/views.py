@@ -16,6 +16,7 @@ def products_view(request):
 def product_view(request, pk):
     product = Product.objects.get(pk=pk)
     context = {
+        'pk': product.pk,
         'name': product.name,
         'description': product.description,
         'price': product.price,
@@ -48,3 +49,28 @@ def product_add_view(request):
             )
 
             return redirect(reverse('product_view', kwargs={'pk': product.pk}))
+
+
+def product_edit_view(request, pk):
+    match request.method:
+        case 'GET':
+            product = Product.objects.get(pk=pk)
+            categories = Category.objects.all()
+            return render(request, 'products/product_edit.html', context={
+                'product': product,
+                'categories': categories,
+            })
+
+        case 'POST':
+            category_id = request.POST.get('category')
+            category = Category.objects.get(pk=category_id)
+
+            product = Product.objects.get(pk=pk)
+            product.name = request.POST.get('name')
+            product.description = request.POST.get('description')
+            product.price = request.POST.get('price')
+            product.image = request.POST.get('image', '')
+            product.category = category
+            product.save()
+
+            return redirect(reverse('product_view', kwargs={'pk': pk}))

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Edit Product
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row py-5">
+            <div class="col-md-12 col-lg-6">
+                <p class="fs-2 mb-4">Edit Product</p>
+
+                <form action="{% url 'product_edit_view' product.pk %}" method="POST">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <input type="text" name="name" class="form-control" placeholder="Title" required
+                        value="{{ product.name }}"
+                        >
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="number" step="0.01" name="price" class="form-control" placeholder="Price" required
+                        value="{{ product.price }}"
+                        >
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="text" name="image" class="form-control" placeholder="Image URL"
+                        value="{{ product.image }}"
+                        >
+                    </div>
+
+                    <div class="mb-3">
+                        <select class="form-select" required name="category">
+                            {% for category in categories %}
+                                {% if category.name == product.category.name %}
+                                    <option selected value="{{ category.pk }}">{{ category.name }}</option>
+                                {% else %}
+                                    <option value="{{ category.pk }}">{{ category.name }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <textarea class="form-control" name="description" placeholder="Description" rows="10">{{ product.description }}</textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary rounded-1 shadow">Edit Product</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
