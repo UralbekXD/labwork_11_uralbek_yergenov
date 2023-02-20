@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Edit Product
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row py-5">
+            <div class="col-md-12 col-lg-6">
+                <p class="fs-2 mb-4">Edit Category</p>
+
+                <form action="{% url 'category_edit_view' category.pk %}" method="POST">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <input type="text" name="name" class="form-control" placeholder="Title" required
+                        value="{{ category.name }}"
+                        >
+                    </div>
+
+                    <div class="mb-3">
+                        <textarea class="form-control" name="description" placeholder="Description" rows="10">{{ category.description }}</textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary rounded-1 shadow">Edit Category</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
