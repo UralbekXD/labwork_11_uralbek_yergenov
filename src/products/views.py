@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
 from products.models import Product
@@ -14,7 +14,7 @@ def products_view(request):
 
 
 def product_view(request, pk):
-    product = Product.objects.get(pk=pk)
+    product = get_object_or_404(Product, pk=pk)
     context = {
         'pk': product.pk,
         'name': product.name,
@@ -39,7 +39,7 @@ def product_add_view(request):
 
         case 'POST':
             category_id = request.POST.get('category')
-            category = Category.objects.get(pk=category_id)
+            category = get_object_or_404(Category, pk=category_id)
             product = Product.objects.create(
                 name=request.POST.get('name'),
                 description=request.POST.get('description'),
@@ -54,7 +54,7 @@ def product_add_view(request):
 def product_edit_view(request, pk):
     match request.method:
         case 'GET':
-            product = Product.objects.get(pk=pk)
+            product = get_object_or_404(Product, pk=pk)
             categories = Category.objects.all()
             return render(request, 'products/product_edit.html', context={
                 'product': product,
@@ -63,9 +63,9 @@ def product_edit_view(request, pk):
 
         case 'POST':
             category_id = request.POST.get('category')
-            category = Category.objects.get(pk=category_id)
+            category = get_object_or_404(Category, pk=category_id)
 
-            product = Product.objects.get(pk=pk)
+            product = get_object_or_404(Product, pk=pk)
             product.name = request.POST.get('name')
             product.description = request.POST.get('description')
             product.price = request.POST.get('price')
@@ -77,7 +77,7 @@ def product_edit_view(request, pk):
 
 
 def product_delete_view(request, pk):
-    product = Product.objects.get(pk=pk)
+    product = get_object_or_404(Product, pk=pk)
     product.delete()
 
     return redirect('products_view')

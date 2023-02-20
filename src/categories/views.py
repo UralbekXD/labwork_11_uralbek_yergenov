@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from categories.models import Category
 
@@ -28,13 +28,13 @@ def category_add_view(request):
 def category_edit_view(request, pk):
     match request.method:
         case 'GET':
-            category = Category.objects.get(pk=pk)
+            category = get_object_or_404(Category, pk=pk)
             return render(request, 'categories/category_edit.html', context={
                 'category': category,
             })
 
         case 'POST':
-            category = Category.objects.get(pk=pk)
+            category = get_object_or_404(Category, pk=pk)
             category.name = request.POST.get('name')
             category.description = request.POST.get('description')
             category.save()
@@ -43,7 +43,7 @@ def category_edit_view(request, pk):
 
 
 def category_delete_view(request, pk):
-    category = Category.objects.get(pk=pk)
+    category = get_object_or_404(Category, pk=pk)
     category.delete()
 
     return redirect('categories_view')
