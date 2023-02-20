@@ -1,0 +1,18 @@
+[
+{
+    "model": "categories.category",
+    "pk": 2,
+    "fields": {
+        "name": "Fruits",
+        "description": "Inlucde all kinds of fruits"
+    }
+},
+{
+    "model": "categories.category",
+    "pk": 3,
+    "fields": {
+        "name": "Electronics",
+        "description": "Computers, Phones, Accessories"
+    }
+}
+]
