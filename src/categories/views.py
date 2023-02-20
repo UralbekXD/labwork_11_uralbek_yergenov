@@ -40,3 +40,10 @@ def category_edit_view(request, pk):
             category.save()
 
             return redirect('categories_view')
+
+
+def category_delete_view(request, pk):
+    category = Category.objects.get(pk=pk)
+    category.delete()
+
+    return redirect('categories_view')
