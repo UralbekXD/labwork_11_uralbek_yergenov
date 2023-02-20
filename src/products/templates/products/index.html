@@ -13,28 +13,21 @@
     <div class="container py-5">
         <div class="row g-4">
             {% for product in products %}
-                <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                    <div class="card shadow-sm rounded-1">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 d-flex align-items-stretch">
+                    <div class="card">
                         {% if product.image %}
-                            <img src="{{ product.image }}" alt="img">
+                            <img src="{{ product.image }}" alt="img" class="card-img-top">
                         {% else %}
-                            <img src="{% static 'products/media/placeholder.png' %}" class="img-fluid" alt="img">
+                            <img src="{% static 'products/media/placeholder_square.png' %}" alt="img" class="card-img-top">
                         {% endif %}
-
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                {{ product.name }}
-                            </h4>
-
-                            <div class="card-text pb-3">
-                                {{ product.category.name }}
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text mt-2">{{ product.category.name }}</p>
+                            <div class="price mb-2 d-flex justify-content-between">
+                                <p class="card-text">Price: </p>
+                                <p class="card-text">{{ product.price }}$</p>
                             </div>
-
-                            <h5 class="card-text mb-4">
-                                Price: {{ product.price }}$
-                            </h5>
-
-                            <div class="btn-group w-100">
+                            <div class="btn-group mt-auto">
                                 <a class="btn btn-sm btn-outline-dark" href="{% url 'product_view' product.pk %}">View</a>
                                 <a class="btn btn-sm btn-outline-dark" href="#">Edit</a>
                             </div>
