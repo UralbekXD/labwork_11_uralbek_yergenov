@@ -74,3 +74,10 @@ def product_edit_view(request, pk):
             product.save()
 
             return redirect(reverse('product_view', kwargs={'pk': pk}))
+
+
+def product_delete_view(request, pk):
+    product = Product.objects.get(pk=pk)
+    product.delete()
+
+    return redirect('products_view')
