@@ -17,7 +17,7 @@
 
                             <div class="btn-group w-25">
                                 <a class="btn btn-sm btn-primary" href="{% url 'category_edit_view' category.pk %}">Edit</a>
-                                <a class="btn btn-sm btn-danger" href="#">Delete</a>
+                                <a class="btn btn-sm btn-danger" href="{% url 'category_delete_view' category.pk %}">Delete</a>
                             </div>
                         </div>
                     </div>
