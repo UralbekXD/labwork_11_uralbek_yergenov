@@ -1,6 +1,6 @@
 from django.urls import path
 
-from categories.views import categories_view, category_add_view, category_edit_view, category_delete_view
+from categories.views import *
 
 urlpatterns = [
     path('', categories_view, name='categories_view'),
